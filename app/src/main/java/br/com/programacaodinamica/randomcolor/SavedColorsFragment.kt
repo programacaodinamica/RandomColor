@@ -45,17 +45,16 @@ class SavedColorsFragment : Fragment() {
         }
 
         save_button.setOnClickListener {
-            val adapter = colors_list.adapter
-            if (adapter is ColorAdapter){
-                val colorId = savedColorsViewModel.randomColor.value
-                if (colorId != null){
-                    adapter.addItem(NamedColor(
-                        colorId,
-                        color_name_edittext.text.toString()
-                    ))
-                    color_name_edittext.setText("")
-                    savedColorsViewModel.randomColor.value = generateRandomColor()
-                }
+            val colorId = savedColorsViewModel.randomColor.value
+            if (colorId != null) {
+                val color = NamedColor(
+                    colorId,
+                    color_name_edittext.text.toString()
+                )
+                savedColorsViewModel.saveColor(color)
+
+                color_name_edittext.setText("")
+                savedColorsViewModel.randomColor.value = generateRandomColor()
             }
         }
     }
@@ -63,6 +62,13 @@ class SavedColorsFragment : Fragment() {
     private fun subscribe(){
         savedColorsViewModel.randomColor.observe(this, Observer {
             random_color_cardview.setCardBackgroundColor(it)
+        })
+
+        savedColorsViewModel.colors.observe(this, Observer {
+            val adapter = colors_list.adapter
+            if (adapter is ColorAdapter){
+                adapter.setData(it)
+            }
         })
     }
 

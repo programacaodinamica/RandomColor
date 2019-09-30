@@ -1,11 +1,14 @@
 package br.com.programacaodinamica.randomcolor.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import br.com.programacaodinamica.randomcolor.commom.toHexCode
 
 
 const val NO_NAME = "Sem nome"
 
-class NamedColor(val id:Int,
+@Entity(tableName = "Color")
+class NamedColor(@PrimaryKey val id:Int,
                  private val _name:String?=null){
     val code: String
     get() = id.toHexCode()
