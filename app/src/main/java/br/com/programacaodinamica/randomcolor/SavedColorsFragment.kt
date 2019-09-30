@@ -1,4 +1,4 @@
-package br.com.programacaodinamica
+package br.com.programacaodinamica.randomcolor
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 
-import br.com.programacaodinamica.randomcolor.R
 import br.com.programacaodinamica.randomcolor.commom.generateRandomColor
 import kotlinx.android.synthetic.main.saved_colors_fragment.*
 
@@ -34,6 +34,7 @@ class SavedColorsFragment : Fragment() {
         }
         setUpListeners()
         subscribe()
+        setUpRecyclerView()
     }
 
 
@@ -47,6 +48,11 @@ class SavedColorsFragment : Fragment() {
         savedColorsViewModel.randomColor.observe(this, Observer {
             random_color_cardview.setCardBackgroundColor(it)
         })
+    }
+
+    private fun setUpRecyclerView(){
+        colors_list.adapter = ColorAdapter()
+        colors_list.layoutManager = LinearLayoutManager(context)
     }
 
 }

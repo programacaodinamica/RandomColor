@@ -1,4 +1,4 @@
-package br.com.programacaodinamica
+package br.com.programacaodinamica.randomcolor
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
