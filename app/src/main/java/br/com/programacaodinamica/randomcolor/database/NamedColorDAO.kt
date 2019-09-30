@@ -10,7 +10,7 @@ import br.com.programacaodinamica.randomcolor.model.NamedColor
 @Dao
 interface NamedColorDAO {
 
-    @Query("SELECT * from Color")
+    @Query("SELECT * from Color ORDER BY timestamp DESC")
     fun allColors(): LiveData<List<NamedColor>>
 
     @Query("SELECT * from Color WHERE _name LIKE :colorName")
