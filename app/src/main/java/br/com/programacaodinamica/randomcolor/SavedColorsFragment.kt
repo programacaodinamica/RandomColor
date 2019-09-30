@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import br.com.programacaodinamica.randomcolor.commom.generateRandomColor
+import br.com.programacaodinamica.randomcolor.model.NamedColor
 import kotlinx.android.synthetic.main.saved_colors_fragment.*
 
 class SavedColorsFragment : Fragment() {
@@ -41,6 +42,21 @@ class SavedColorsFragment : Fragment() {
     private fun setUpListeners(){
         refresh_button.setOnClickListener {
             savedColorsViewModel.randomColor.value = generateRandomColor()
+        }
+
+        save_button.setOnClickListener {
+            val adapter = colors_list.adapter
+            if (adapter is ColorAdapter){
+                val colorId = savedColorsViewModel.randomColor.value
+                if (colorId != null){
+                    adapter.addItem(NamedColor(
+                        colorId,
+                        color_name_edittext.text.toString()
+                    ))
+                    color_name_edittext.setText("")
+                    savedColorsViewModel.randomColor.value = generateRandomColor()
+                }
+            }
         }
     }
 

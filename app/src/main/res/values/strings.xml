@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RandomColor</string>
+    <string name="nameless_string">Sem nome</string>
 </resources>

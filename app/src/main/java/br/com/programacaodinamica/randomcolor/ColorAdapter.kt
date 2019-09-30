@@ -8,11 +8,16 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.programacaodinamica.randomcolor.model.NamedColor
 
-class ColorAdapter(private var items:List<NamedColor> = listOf()):
+class ColorAdapter(private var items:MutableList<NamedColor> = mutableListOf()):
                     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun getItemCount() = items.size
+
+    fun addItem(color: NamedColor){
+        items.add(color)
+        notifyItemInserted(items.size-1)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val card = LayoutInflater

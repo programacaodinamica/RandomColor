@@ -11,5 +11,5 @@ class NamedColor(val id:Int,
     get() = id.toHexCode()
 
     val name: String
-    get() = _name ?: NO_NAME
+    get() = if (_name.isNullOrBlank()) NO_NAME else _name
 }
